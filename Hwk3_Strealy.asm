@@ -108,8 +108,7 @@ printBeforeArray:
 	li $v0, 4
 	syscall
 
-	# print array 
-	la $s0, intArray
+	# print array
 	li $t0, 0		# i = 0
 		
 	while:
