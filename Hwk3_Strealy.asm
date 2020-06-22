@@ -71,6 +71,7 @@ errorExit:
 	li $v0, 10
 	syscall
 
+# move ints from buffer into intArray
 extractInts:
 
 la $s0, buffer		# $s0 points to buffer
@@ -85,8 +86,8 @@ li $t3, 4		# nextWord max = 4
 	lb $t2, ($s0)		# $t2 = intArray[]
 	beq $t2, '\n', nextWord	# if $t2 = \n, go to nextWord
 	beq $t2, '\0', exitLoop	# if $t2 = \0, go to exitLoop
-	blt $t2, 48, errorMsg	# if $t2 is not a digit, go to errorMsg
-	bgt $t2, 57, errorMsg	# same as above
+	blt $t2, 48, errorExit	# if $t2 is not a digit, go to errorMsg
+	bgt $t2, 57, errorExit	# same as above
 	addi $t2, $t2, -48	# convert ASCII to decimal
 	sb $t2, ($s1)		# save byte in $t2 to intArray[]
 	addi $t0, $t0, 1	# i++
@@ -105,6 +106,7 @@ li $t3, 4		# nextWord max = 4
 		exitLoop:
 		jr	$ra
 
+# print array before sorting
 printBeforeArray:
 
 	# print before message
