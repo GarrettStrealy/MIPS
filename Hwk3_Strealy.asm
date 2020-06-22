@@ -84,6 +84,9 @@ li $t3, 4		# nextWord max = 4
 	lb $t2, ($s0)		# $t2 = intArray[]
 	beq $t2, '\n', nextWord	# if $t2 = \n, go to nextWord
 	beq $t2, '\0', exitLoop	# if $t2 = \0, go to exitLoop
+	blt $t2, 48, errorMsg	# if $t2 is not a digit, go to errorMsg
+	bgt $t2, 57, errorMsg	# same as above
+	addi $t2, $t2, -48	# convert ASCII to decimal
 	sb $t2, ($s1)		# save byte in $t2 to intArray[]
 	addi $t0, $t0, 1	# i++
 	addi $s0, $s0, 1	# increment buffer
@@ -108,7 +111,8 @@ printBeforeArray:
 	li $v0, 4
 	syscall
 
-	# print array
+	# print array 
+	la $s0, intArray
 	li $t0, 0		# i = 0
 		
 	while:
@@ -123,6 +127,7 @@ printBeforeArray:
 		move $a0, $t1
 		syscall	
 		
+		space:
 		# print space
 		li $v0, 11 
 		li $a0, 32
@@ -146,4 +151,7 @@ printAfterArray:
 	jr $ra
 		
 # Current output:
-# The array before: 14385 57 14130 53 14388 13873 50 13109 13366 14393 14644 12856 55 14129 13109 14387 13622 12599 13362 12595
+# The array before: 2049 9 1794 5 2052 1537 2 773 1030 2057 2308 520 7 1793 773 2051 1286 263 1026 259 
+
+# Expected output: 
+# The array before: 18 9 27 5 48 16 2 53 64 98 49 82 7 17 53 38 65 71 24 31
