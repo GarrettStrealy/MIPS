@@ -33,6 +33,7 @@ jal extractInts
 
 jal printBeforeArray
 
+#exit
 li $v0, 10
 syscall
 
@@ -136,18 +137,6 @@ printBeforeArray:
 		j while
 		
 	exit:
-	jr $ra
-
-printAfterArray:
-
-	# print after message
-	la $a0, afterMsg
-	li $v0, 4
-	syscall
-
-	# print array
-	la	$s0, intArray
-	
 	jr $ra
 		
 # Current output:
