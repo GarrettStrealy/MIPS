@@ -357,12 +357,13 @@ calcStnDev:
 	
 	exitStnDev:
 		jr $ra # return to main
-		
-# Output:
+
+#-------------------------------------------
 # The array before: 	18 9 27 5 48 16 2 53 64 98 49 82 7 17 53 38 65 71 24 31 
 # The array after: 	2 5 7 9 16 17 18 24 27 31 38 48 49 53 53 64 65 71 82 98 
 # The mean is: 38.85
 # The median is: 34.5
 # The standard deviation is: 27.686735
 # -- program is finished running --
+#-------------------------------------------
 
